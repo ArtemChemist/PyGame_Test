@@ -1,8 +1,18 @@
 class Settings():
 
     def __init__(self):
+        
+        #Main screen
         self.scrn_width = 1200 # Main screen witdth
         self.scrn_hight = 800 # # Main screen height
         self.bcgr_color = (230,230,230) # Main screen witdth
         self.scrn_size = (self.scrn_width, self.scrn_hight)
-        self.ship_speed_factor = 5.2
+        
+        #Ship
+        self.ship_speed = 2.2
+
+        #Bullets
+        self.bullet_speed = 5
+        self.bullet_width = 2
+        self.bullet_length = 10
+        self.bulet_color = (200, 50,0)
