@@ -22,8 +22,8 @@ class Ship():
         
     def update(self):
         if self.moving_r and (self.center<self.screen_rect.right):
-            self.center+=self.set.ship_speed_factor
+            self.center+=self.set.ship_speed
         if self.moving_l and (self.center>self.screen_rect.left):
-            self.center-=self.set.ship_speed_factor
+            self.center-=self.set.ship_speed
         self.rect.centerx = int(self.center)
             
