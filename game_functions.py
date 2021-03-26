@@ -1,7 +1,7 @@
 import sys
 import pygame
 
-def check_events():
+def check_events(ship):
     """
     Respond to keyboard and mous
 
@@ -10,9 +10,25 @@ def check_events():
     None.
 
     """
+    
+    # Scroll through all events that wee risen
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT: #Quit if user asked to
             sys.exit()
+       
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RIGHT: #Go right
+                ship.moving_r = True
+            if event.key == pygame.K_LEFT:  #Go left
+                ship.moving_l = True
+                
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_RIGHT: #Go right
+                ship.moving_r = False
+            if event.key == pygame.K_LEFT:  #Go left
+                ship.moving_l = False
+
+
     
 def update_screen(ai_set, screen, ship):
     """
