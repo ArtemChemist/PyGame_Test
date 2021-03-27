@@ -48,7 +48,7 @@ def handle_key_up(event_to_handle,ship):
     if event_to_handle.key == pygame.K_LEFT:  #Go left
         ship.moving_l = False   
 
-def update_screen(ai_set, screen, ship, bullets):
+def update_screen(ai_set, screen, ship, bullets,alien):
     """
     Update images on the screen and flip to the new screen
 
@@ -60,7 +60,10 @@ def update_screen(ai_set, screen, ship, bullets):
         main game window
     ship : Ship
         Player's ship
-
+    bullets : Group
+        Bullets fied from the ship
+    alien : Alien
+        Alien
     Returns
     -------
     None.
@@ -68,6 +71,7 @@ def update_screen(ai_set, screen, ship, bullets):
     """
     screen.fill(ai_set.bcgr_color)
     ship.blitme()
+    alien.blitme()
     for bullet in bullets:  #Redraw all bullets
         bullet.draw()
     pygame.display.flip()
