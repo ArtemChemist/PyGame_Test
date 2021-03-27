@@ -20,7 +20,7 @@ class Settings():
 
         #Aliens
         self.alien_speed = 1
-        self.alien_drop_speed = 10
-        self.max_aliens = 10
+        self.alien_drop_speed = 5
+        self.max_aliens = 1
         self.fleet_dir = 1
 
