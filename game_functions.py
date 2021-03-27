@@ -1,7 +1,8 @@
 import sys
 import pygame
+from bullet import Bullet
 
-def check_events(ship):
+def check_events(ai_set, screen, ship, bullets):
     """
     Respond to keyboard and mouse
     Returns
@@ -13,11 +14,11 @@ def check_events(ship):
         if event.type == pygame.QUIT: #Quit if user asked to
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            handle_key_down(event, ship)
+            handle_key_down(ai_set, screen, event, ship, bullets)
         elif event.type == pygame.KEYUP:
             handle_key_up(event, ship)  
 
-def handle_key_down(event_to_handle,ship):
+def handle_key_down(ai_set, screen, event_to_handle,ship, bullets):
 
     """
     Respond to keypresses
@@ -25,10 +26,13 @@ def handle_key_down(event_to_handle,ship):
     -------
     None.
     """
-    if event_to_handle.key == pygame.K_RIGHT: #Go right
+    if event_to_handle.key == pygame.K_RIGHT:   #Go right
         ship.moving_r = True
-    if event_to_handle.key == pygame.K_LEFT:  #Go left
+    elif event_to_handle.key == pygame.K_LEFT:  #Go left
         ship.moving_l = True
+    elif event_to_handle.key == pygame.K_SPACE:  #make a new bullet
+        new_bullet = Bullet(ai_set,screen,ship)
+        bullets.add(new_bullet)
 
 def handle_key_up(event_to_handle,ship):
     """
@@ -42,7 +46,7 @@ def handle_key_up(event_to_handle,ship):
     if event_to_handle.key == pygame.K_LEFT:  #Go left
         ship.moving_l = False   
 
-def update_screen(ai_set, screen, ship):
+def update_screen(ai_set, screen, ship, bullets):
     """
     Update images on the screen and flip to the new screen
 
@@ -62,4 +66,6 @@ def update_screen(ai_set, screen, ship):
     """
     screen.fill(ai_set.bcgr_color)
     ship.blitme()
+    for bullet in bullets:  #Redraw all bullets
+        bullet.draw()
     pygame.display.flip()
