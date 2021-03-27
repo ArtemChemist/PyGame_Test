@@ -32,9 +32,7 @@ def handle_key_down(ai_set, screen, event_to_handle,ship, bullets):
     elif event_to_handle.key == pygame.K_LEFT:  #Go left
         ship.moving_l = True
     elif event_to_handle.key == pygame.K_SPACE:  #make a new bullet
-        if(len(bullets)<ai_set.bul_allowed):
-            new_bullet = Bullet(ai_set,screen,ship)
-            bullets.add(new_bullet)
+        fire(ai_set,screen,ship,bullets)
 
 def handle_key_up(event_to_handle,ship):
     """
@@ -78,4 +76,7 @@ def update_bullets(bullets = Group()):
         if bullet.rect.bottom<0:
             bullets.remove(bullet)
 
-
+def fire(ai_set, screen, ship,bullets):
+    if(len(bullets)<ai_set.bul_allowed):
+        new_bullet = Bullet(ai_set,screen,ship)
+        bullets.add(new_bullet)
