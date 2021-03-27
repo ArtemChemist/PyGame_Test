@@ -1,6 +1,7 @@
 import sys
 import pygame
 from bullet import Bullet
+from pygame.sprite import Group
 
 def check_events(ai_set, screen, ship, bullets):
     """
@@ -70,3 +71,11 @@ def update_screen(ai_set, screen, ship, bullets):
     for bullet in bullets:  #Redraw all bullets
         bullet.draw()
     pygame.display.flip()
+
+def update_bullets(bullets = Group()):
+    bullets.update()                                #Update group of bullets
+    for bullet in bullets:
+        if bullet.rect.bottom<0:
+            bullets.remove(bullet)
+
+

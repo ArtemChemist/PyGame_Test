@@ -30,7 +30,7 @@ def run_game():
         #Every turn of the main cycle
         gf.check_events(ai_set, screen, ship, bullets)  #Listen to keyboard/mouse events
         ship.update()                                   #Update ship position on te screen
-        bullets.update()                                #Update group of bullets
+        gf.update_bullets(bullets)
         gf.update_screen(ai_set, screen, ship, bullets) #Update screen
 
 run_game()
