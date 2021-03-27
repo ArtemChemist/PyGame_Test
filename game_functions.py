@@ -33,6 +33,8 @@ def handle_key_down(ai_set, screen, event_to_handle,ship, bullets):
         ship.moving_l = True
     elif event_to_handle.key == pygame.K_SPACE:  #make a new bullet
         fire(ai_set,screen,ship,bullets)
+    elif event_to_handle.key == pygame.K_q:      #quit if required
+        sys.exit()
 
 def handle_key_up(event_to_handle,ship):
     """
