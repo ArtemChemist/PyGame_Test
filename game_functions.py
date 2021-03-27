@@ -89,13 +89,26 @@ def fire(ai_set, screen, ship,bullets):
         new_bullet = Bullet(ai_set,screen,ship)
         bullets.add(new_bullet)
 
-def make_fleet(ai_set, screen=pygame.Surface((1200,800)), aliens = Group()):
-    alien = Alien(ai_set,screen)
+def get_number_aliens_raw(ai_set):
+    alien = Alien(ai_set)
     width = alien.rect.width
     availabel_space_x =  ai_set.scrn_width - width
-    number_aliens = availabel_space_x//(2*width)
-    for i in range(number_aliens):
-        alien = Alien(ai_set,screen)
-        alien.x = width + 2*width*i
-        alien.rect.x = alien.x
-        aliens.add(alien)
+    return availabel_space_x//(2*width)
+
+def get_number_aliens_column(ai_set=settings.Settings()):
+    alien = Alien(ai_set)
+    hight = alien.rect.height
+    availabel_space_y =  ai_set.scrn_hight - 3*hight
+    return availabel_space_y//(2*hight)
+
+def make_fleet(ai_set, screen=pygame.Surface((1200,800)), aliens = Group()):
+    aliens_in_raw = get_number_aliens_raw(ai_set)
+    aliens_in_column = get_number_aliens_column(ai_set)
+    for k in range (aliens_in_column):
+        for i in range(aliens_in_raw):
+            alien = Alien(ai_set,screen)
+            alien.x = alien.rect.width + 2*alien.rect.width*i
+            alien.rect.x = alien.x
+            alien.y = alien.rect.height + 2*alien.rect.height*k
+            alien.rect.y = alien.y
+            aliens.add(alien)
