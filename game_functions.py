@@ -78,8 +78,9 @@ def update_screen(ai_set, screen, ship, bullets,aliens):
         bullet.draw()
     pygame.display.flip()
 
-def update_bullets(bullets = Group()):
+def update_bullets(bullets, aliens):
     bullets.update()                                #Update group of bullets
+    collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
     for bullet in bullets:
         if bullet.rect.bottom<0:
             bullets.remove(bullet)
@@ -121,11 +122,11 @@ def updat_aliens(ai_set, aliens):
 def check_fleet_edges(ai_set, aliens):
     for alien in aliens:
         if alien.check_edges():
-            change_fleet_dir(ai_set, aliens)
+            ai_set.fleet_dir *= -1
+            for alien in aliens:
+                alien.y+=ai_set.alien_drop_speed
+                alien.rect.y = alien.y
             break
 
-def change_fleet_dir(ai_set, aliens):
-    ai_set.fleet_dir *= -1
-    for alien in aliens:
-        alien.y+=ai_set.alien_drop_speed
-        alien.rect.y = alien.y
+
+
