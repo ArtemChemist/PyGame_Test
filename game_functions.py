@@ -114,5 +114,18 @@ def make_fleet(ai_set, screen=pygame.Surface((1200,800)), aliens = Group()):
                 alien.rect.y = alien.y
                 aliens.add(alien)
 
-def updat_aliens(aliens):
+def updat_aliens(ai_set, aliens):
+    check_fleet_edges(ai_set, aliens)
     aliens.update()
+
+def check_fleet_edges(ai_set, aliens):
+    for alien in aliens:
+        if alien.check_edges():
+            change_fleet_dir(ai_set, aliens)
+            break
+
+def change_fleet_dir(ai_set, aliens):
+    ai_set.fleet_dir *= -1
+    for alien in aliens:
+        alien.y+=ai_set.alien_drop_speed
+        alien.rect.y = alien.y

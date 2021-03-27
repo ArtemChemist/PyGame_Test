@@ -7,6 +7,7 @@ class Alien(Sprite):
         self.screen = screen
         self.set = ai_settings
         
+        
         #Load the image
         self.image = pygame.image.load('Img/ufo.png')
         self.rect = self.image.get_rect()
@@ -23,5 +24,12 @@ class Alien(Sprite):
         self.screen.blit(self.image, self.rect)
 
     def update(self):
-        self.x +=self.set.alien_speed
+        self.x +=self.set.fleet_dir*self.set.alien_speed
         self.rect.x = int(self.x)
+
+    def check_edges(self):
+        scrn_rect = self.screen.get_rect()
+        if(self.rect.left<=scrn_rect.left):
+            return True
+        elif(self.rect.right >=scrn_rect.right):
+            return True
