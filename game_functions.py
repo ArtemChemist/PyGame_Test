@@ -2,6 +2,8 @@ import sys
 import pygame
 from bullet import Bullet
 from pygame.sprite import Group
+import settings
+from alien import Alien
 
 def check_events(ai_set, screen, ship, bullets):
     """
@@ -48,7 +50,7 @@ def handle_key_up(event_to_handle,ship):
     if event_to_handle.key == pygame.K_LEFT:  #Go left
         ship.moving_l = False   
 
-def update_screen(ai_set, screen, ship, bullets,alien):
+def update_screen(ai_set, screen, ship, bullets,aliens):
     """
     Update images on the screen and flip to the new screen
 
@@ -71,7 +73,7 @@ def update_screen(ai_set, screen, ship, bullets,alien):
     """
     screen.fill(ai_set.bcgr_color)
     ship.blitme()
-    alien.blitme()
+    aliens.draw(screen)
     for bullet in bullets:  #Redraw all bullets
         bullet.draw()
     pygame.display.flip()
@@ -86,3 +88,14 @@ def fire(ai_set, screen, ship,bullets):
     if(len(bullets)<ai_set.bul_allowed):
         new_bullet = Bullet(ai_set,screen,ship)
         bullets.add(new_bullet)
+
+def make_fleet(ai_set, screen=pygame.Surface((1200,800)), aliens = Group()):
+    alien = Alien(ai_set,screen)
+    width = alien.rect.width
+    availabel_space_x =  ai_set.scrn_width - width
+    number_aliens = availabel_space_x//(2*width)
+    for i in range(number_aliens):
+        alien = Alien(ai_set,screen)
+        alien.x = width + 2*width*i
+        alien.rect.x = alien.x
+        aliens.add(alien)
