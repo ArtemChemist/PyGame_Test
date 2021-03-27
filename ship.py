@@ -14,8 +14,7 @@ class Ship():
         self.center = float(self.rect.centerx)
 
         # Start the new ship at the bottom center of the screen
-        self.rect.centerx = self.screen_rect.centerx
-        self.rect.bottom = self.screen_rect.bottom
+        self.center_ship()
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
@@ -26,4 +25,7 @@ class Ship():
         if self.moving_l and (self.center>self.screen_rect.left):
             self.center-=self.set.ship_speed
         self.rect.centerx = int(self.center)
-            
+    
+    def center_ship(self):
+        self.rect.centerx = self.screen_rect.centerx
+        self.rect.bottom = self.screen_rect.bottom
