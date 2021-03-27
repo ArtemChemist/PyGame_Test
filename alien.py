@@ -21,3 +21,7 @@ class Alien(Sprite):
 
     def blitme(self):
         self.screen.blit(self.image, self.rect)
+
+    def update(self):
+        self.x +=self.set.alien_speed
+        self.rect.x = int(self.x)

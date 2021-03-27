@@ -35,6 +35,7 @@ def run_game():
         gf.check_events(ai_set, screen, ship, bullets)  #Listen to keyboard/mouse events
         ship.update()                                   #Update ship position on te screen
         gf.update_bullets(bullets)
+        gf.updat_aliens(aliens)
         gf.update_screen(ai_set, screen, ship, bullets, aliens) #Update screen
 
 run_game()
