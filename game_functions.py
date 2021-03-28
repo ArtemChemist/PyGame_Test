@@ -97,9 +97,12 @@ def update_screen(ai_set, screen, stats, ship, bullets, aliens, buttonPlay, sb):
         buttonPlay.draw()
     pygame.display.flip()
 
-def update_bullets(ai_set, screen,bullets, aliens):
+def update_bullets(ai_set, screen, stats, sb, bullets, aliens):
     bullets.update()                                #Update group of bullets
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
+    if collisions:
+        stats.score +=ai_set.points_alien
+        sb.prep_score()
     if(len(aliens)==0):
         bullets.empty()
         ai_set.increase_sped()

@@ -49,7 +49,7 @@ def run_game():
         gf.check_events(ai_set, stats, screen, ship, bullets, buttonPlay,aliens)  #Listen to keyboard/mouse events
         if stats.active:
             ship.update()                                   #Update ship position on te screen
-            gf.update_bullets(ai_set, screen, bullets, aliens)
+            gf.update_bullets(ai_set, screen, stats, sb, bullets, aliens)
             gf.updat_aliens(ai_set,screen, aliens,ship,stats, bullets)
         gf.update_screen(ai_set, screen, stats, ship, bullets, aliens, buttonPlay, sb) #Update screen
 
