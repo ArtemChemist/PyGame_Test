@@ -6,7 +6,7 @@ import settings
 from alien import Alien
 from time import sleep
 
-def check_events(ai_set, screen, ship, bullets):
+def check_events(ai_set, stats, screen, ship, bullets, buttonPlay):
     """
     Respond to keyboard and mouse
     Returns
@@ -21,6 +21,13 @@ def check_events(ai_set, screen, ship, bullets):
             handle_key_down(ai_set, screen, event, ship, bullets)
         elif event.type == pygame.KEYUP:
             handle_key_up(event, ship)  
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = pygame.mouse.get_pos()
+            check_play_button(stats, buttonPlay, mouse_x, mouse_y )
+
+def check_play_button(stats, buttonPlay, mouse_x=0, mouse_y=0):
+    if buttonPlay.rect.collidepoint(mouse_x, mouse_y):
+        stats.active = True
 
 def handle_key_down(ai_set, screen, event_to_handle,ship, bullets):
 
