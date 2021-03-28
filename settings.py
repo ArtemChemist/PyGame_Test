@@ -17,11 +17,11 @@ class Settings():
         self.bullet_width = 3
         self.bullet_length = 15
         self.bulet_color = (180,0,40)
-        self.bul_allowed = 3
+        self.bul_allowed = 10
 
         #Aliens
         self.alien_speed = 1
-        self.alien_drop_speed = 100
+        self.alien_drop_speed = 10
         self.max_aliens = 10
         self.fleet_dir = 1
 
