@@ -6,7 +6,7 @@ import settings
 from alien import Alien
 from time import sleep
 
-def check_events(ai_set, stats, screen, ship, bullets, buttonPlay, aliens):
+def check_events(ai_set, stats, screen, sb, ship, bullets, buttonPlay, aliens):
     """
     Respond to keyboard and mouse
     Returns
@@ -23,9 +23,9 @@ def check_events(ai_set, stats, screen, ship, bullets, buttonPlay, aliens):
             handle_key_up(event, ship)  
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_x, mouse_y = pygame.mouse.get_pos()
-            check_play_button(ai_set,stats, screen, buttonPlay, ship, aliens, bullets,mouse_x, mouse_y )
+            check_play_button(ai_set,stats, screen, sb, buttonPlay, ship, aliens, bullets,mouse_x, mouse_y )
 
-def check_play_button(ai_set,stats, screen, buttonPlay, ship, aliens, bullets, mouse_x=0, mouse_y=0):
+def check_play_button(ai_set,stats, screen, sb, buttonPlay, ship, aliens, bullets, mouse_x=0, mouse_y=0):
     if buttonPlay.rect.collidepoint(mouse_x, mouse_y) and not stats.active:
         stats.active = True
         stats.resetstats()
@@ -34,6 +34,9 @@ def check_play_button(ai_set,stats, screen, buttonPlay, ship, aliens, bullets, m
         aliens.empty()
         make_fleet(ai_set, screen, aliens)
         ship.center_ship()
+        sb.prep_ships()
+        sb.prep_hi_score()
+        sb.prep_level()
         pygame.mouse.set_visible(False)
 
 def handle_key_down(ai_set, screen, event_to_handle,ship, bullets):
@@ -137,7 +140,7 @@ def make_fleet(ai_set, screen=pygame.Surface((1200,800)), aliens = Group()):
                 alien = Alien(ai_set,screen)
                 alien.x = alien.rect.width + 2*alien.rect.width*i
                 alien.rect.x = alien.x
-                alien.y = alien.rect.height + 2*alien.rect.height*k
+                alien.y = 3*alien.rect.height + 2*alien.rect.height*k
                 alien.rect.y = alien.y
                 aliens.add(alien)
 
@@ -179,6 +182,7 @@ def ship_hit(ai_set, stats, screen,ship,aliens, bullets,sb):
         stats.ships_left-=1
         aliens.empty()
         bullets.empty()
+        sb.prep_ships()
         make_fleet(ai_set, screen, aliens)
         ship.center_ship()
         sleep(0.5)

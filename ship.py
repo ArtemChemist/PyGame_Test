@@ -1,8 +1,9 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Ship():
+class Ship(Sprite):
     def __init__(self, screen,ai_set):
-        
+        super().__init__()
         #Load the image and get its rectangle
         self.screen = screen
         self.image = pygame.image.load('Img/spaceship.png')
