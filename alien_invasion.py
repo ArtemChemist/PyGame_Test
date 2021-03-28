@@ -1,11 +1,14 @@
 import pygame
+from time import sleep
+from pygame.sprite import Group
+
+from game_stats import GameStats
+import button as bt
 from settings import Settings
 from ship import Ship
 import game_functions as gf
-from pygame.sprite import Group
-from game_stats import GameStats
-import button as bt
-from time import sleep
+from scoreboard import Scoreboard
+
 def run_game():
     """
     Main game function
@@ -37,6 +40,9 @@ def run_game():
     #Make play button
     buttonPlay = bt.Button(ai_set, screen, 'PLAY')
 
+    #Make a scoreboard
+    sb = Scoreboard(ai_set, screen, stats)
+
     #Start the main loop
     while True:
         #Every turn of the main cycle
@@ -45,6 +51,6 @@ def run_game():
             ship.update()                                   #Update ship position on te screen
             gf.update_bullets(ai_set, screen, bullets, aliens)
             gf.updat_aliens(ai_set,screen, aliens,ship,stats, bullets)
-        gf.update_screen(ai_set, screen, stats, ship, bullets, aliens, buttonPlay) #Update screen
+        gf.update_screen(ai_set, screen, stats, ship, bullets, aliens, buttonPlay, sb) #Update screen
 
 run_game()

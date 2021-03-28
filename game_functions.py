@@ -65,7 +65,7 @@ def handle_key_up(event_to_handle,ship):
     if event_to_handle.key == pygame.K_LEFT:  #Go left
         ship.moving_l = False   
 
-def update_screen(ai_set, screen, stats, ship, bullets,aliens,buttonPlay):
+def update_screen(ai_set, screen, stats, ship, bullets, aliens, buttonPlay, sb):
     """
     Update images on the screen and flip to the new screen
 
@@ -87,10 +87,12 @@ def update_screen(ai_set, screen, stats, ship, bullets,aliens,buttonPlay):
 
     """
     screen.fill(ai_set.bcgr_color)
+
     ship.blitme()
     aliens.draw(screen)
     for bullet in bullets:  #Redraw all bullets
         bullet.draw()
+    sb.show()
     if not stats.active:
         buttonPlay.draw()
     pygame.display.flip()
