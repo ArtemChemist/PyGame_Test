@@ -14,14 +14,24 @@ class Scoreboard():
 
         #Prep the initial score txt-image
         self.prep_score()
+        self.prep_hi_score()
 
     def prep_score(self):
-        rounded_score = int(round(self.stats.score))
-        score_str = "{:,}".format(rounded_score)
+        self.rounded_score = int(round(self.stats.score))
+        score_str = "Score: {:,}".format(self.rounded_score)
         self.score_img = self.font.render(score_str,True, self.txt_color, self.ai_set.bcgr_color)
         self.score_rect = self.score_img.get_rect()
         self.score_rect.right = self.scrn_rect.right-20
         self.score_rect.top = self.scrn_rect.top+20
+    
+    def prep_hi_score(self):
+        hiscore_str = "Top score: {:,}".format(self.stats.hi_score)
+        self.hi_score_img = self.font.render(hiscore_str,True, self.txt_color, self.ai_set.bcgr_color)
+        self.hi_score_rect = self.hi_score_img.get_rect()
+        self.hi_score_rect.left = self.scrn_rect.left
+        self.hi_score_rect.top = self.scrn_rect.top+20
+
     def show(self):
         self.scrn.blit(self.score_img, self.score_rect)
+        self.scrn.blit(self.hi_score_img, self.hi_score_rect)
 

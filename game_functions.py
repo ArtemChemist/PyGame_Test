@@ -141,12 +141,12 @@ def make_fleet(ai_set, screen=pygame.Surface((1200,800)), aliens = Group()):
                 alien.rect.y = alien.y
                 aliens.add(alien)
 
-def updat_aliens(ai_set, screen, aliens, ship, stats, bullets):
-    check_fleet_bottom(ai_set, stats, screen,ship,aliens, bullets)
+def updat_aliens(ai_set, screen, aliens, ship, stats, bullets,sb):
+    check_fleet_bottom(ai_set, stats, screen,ship,aliens, bullets,sb)
     check_fleet_edges(ai_set, aliens)
     aliens.update()
     if pygame.sprite.spritecollideany(ship, aliens):
-        ship_hit(ai_set, stats, screen,ship,aliens, bullets)
+        ship_hit(ai_set, stats, screen,ship,aliens, bullets,sb)
 
 def check_fleet_edges(ai_set, aliens):
     for alien in aliens:
@@ -157,14 +157,20 @@ def check_fleet_edges(ai_set, aliens):
                 alien.rect.y = alien.y
             break
 
-def check_fleet_bottom(ai_set, stats, screen,ship,aliens, bullets):
+def check_fleet_bottom(ai_set, stats, screen,ship,aliens, bullets,sb):
     scrn_rect = screen.get_rect()
     for alien in aliens:
         if(alien.rect.bottom >= scrn_rect.bottom):
-            ship_hit(ai_set, stats, screen,ship,aliens, bullets)
+            ship_hit(ai_set, stats, screen,ship,aliens, bullets,sb)
             break
 
-def ship_hit(ai_set, stats, screen,ship,aliens, bullets):
+def check_hi_score(stats, sb):
+    if stats.score > stats.hi_score:
+        stats.hi_score = stats.score
+        sb.prep_hi_score()
+
+
+def ship_hit(ai_set, stats, screen,ship,aliens, bullets,sb):
     if stats.ships_left>1:
         stats.ships_left-=1
         aliens.empty()
@@ -175,6 +181,7 @@ def ship_hit(ai_set, stats, screen,ship,aliens, bullets):
     else:
         stats.active = False
         pygame.mouse.set_visible(True)
+        check_hi_score(stats, sb)
 
 
 
