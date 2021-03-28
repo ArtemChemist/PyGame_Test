@@ -5,6 +5,7 @@ import game_functions as gf
 from pygame.sprite import Group
 from game_stats import GameStats
 import button as bt
+from time import sleep
 def run_game():
     """
     Main game function
