@@ -21,7 +21,7 @@ class Settings():
         self.alien_drop_speed = 10
         self.max_aliens = 10
 
-        self.speedup_scale = 2
+        self.speedup_scale = 1.5
         self.initialize_dynamic_settings()
 
         #Initialize dynamic settings
@@ -36,6 +36,7 @@ class Settings():
         self.bullet_speed *= self.speedup_scale
         self.alien_drop_speed *= self.speedup_scale
         self.ship_speed *= self.speedup_scale
+        self.points_alien *=self.speedup_scale
 
 
 
