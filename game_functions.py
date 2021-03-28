@@ -29,6 +29,7 @@ def check_play_button(ai_set,stats, screen, buttonPlay, ship, aliens, bullets, m
     if buttonPlay.rect.collidepoint(mouse_x, mouse_y) and not stats.active:
         stats.active = True
         stats.resetstats()
+        ai_set.initialize_dynamic_settings()
         bullets.empty()
         aliens.empty()
         make_fleet(ai_set, screen, aliens)
