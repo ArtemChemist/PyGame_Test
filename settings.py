@@ -3,14 +3,14 @@ class Settings():
     def __init__(self):
         
         #Main screen
-        self.scrn_width = 1200 # Main screen witdth
-        self.scrn_hight = 800 # # Main screen height
+        self.scrn_width = 800 # Main screen witdth
+        self.scrn_hight = 400 # # Main screen height
         self.bcgr_color = (20,0,20) # Main screen witdth
         self.scrn_size = (self.scrn_width, self.scrn_hight)
         
         #Ship
         self.ship_speed = 2.2
-        self.ship_limit = 3
+        self.ship_limit = 1
 
         #Bullets
         self.bullet_speed = 5
@@ -22,7 +22,7 @@ class Settings():
         #Aliens
         self.alien_speed = 1
         self.alien_drop_speed = 10
-        self.max_aliens = 10
+        self.max_aliens = 20
         self.fleet_dir = 1
 
 
