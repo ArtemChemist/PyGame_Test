@@ -101,7 +101,7 @@ def update_bullets(ai_set, screen, stats, sb, bullets, aliens):
     bullets.update()                                #Update group of bullets
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
     if collisions:
-        stats.score +=ai_set.points_alien
+        stats.score += len(collisions)*ai_set.points_alien
         sb.prep_score()
     if(len(aliens)==0):
         bullets.empty()
