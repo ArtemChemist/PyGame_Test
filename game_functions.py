@@ -105,7 +105,7 @@ def update_bullets(ai_set, screen, stats, sb, bullets, aliens):
         sb.prep_score()
     if(len(aliens)==0):
         bullets.empty()
-        ai_set.increase_sped()
+        up_the_level(ai_set, stats, sb)
         make_fleet(ai_set, screen, aliens)
     for bullet in bullets:
         if bullet.rect.bottom<0:
@@ -169,6 +169,10 @@ def check_hi_score(stats, sb):
         stats.hi_score = stats.score
         sb.prep_hi_score()
 
+def up_the_level(ai_set, stats, sb):
+    ai_set.increase_speed()
+    stats.level+=1
+    sb.prep_level()
 
 def ship_hit(ai_set, stats, screen,ship,aliens, bullets,sb):
     if stats.ships_left>1:

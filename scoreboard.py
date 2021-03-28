@@ -15,6 +15,7 @@ class Scoreboard():
         #Prep the initial score txt-image
         self.prep_score()
         self.prep_hi_score()
+        self.prep_level()
 
     def prep_score(self):
         self.rounded_score = int(round(self.stats.score))
@@ -31,7 +32,15 @@ class Scoreboard():
         self.hi_score_rect.left = self.scrn_rect.left
         self.hi_score_rect.top = self.scrn_rect.top+20
 
+    def prep_level(self):
+        lvl_str = "Level: {:,}".format(self.stats.level)
+        self.lvl_img = self.font.render(lvl_str,True, self.txt_color, self.ai_set.bcgr_color)
+        self.lvl_rect = self.lvl_img.get_rect()
+        self.lvl_rect.centerx = self.scrn_rect.centerx
+        self.lvl_rect.top = self.scrn_rect.top+20
+
     def show(self):
         self.scrn.blit(self.score_img, self.score_rect)
         self.scrn.blit(self.hi_score_img, self.hi_score_rect)
+        self.scrn.blit(self.lvl_img, self.lvl_rect)
 
